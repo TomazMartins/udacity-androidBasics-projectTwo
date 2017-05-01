@@ -8,6 +8,13 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import static br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivity.Sets.SET_1;
+import static br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivity.Sets.SET_2;
+import static br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivity.Sets.SET_3;
+import static br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivity.Sets.SET_4;
+import static br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivity.Sets.SET_5;
+
+
 public class MainActivity extends AppCompatActivity {
     private TextView ref_score_set1_teamA;
     private TextView ref_score_set2_teamA;
@@ -37,22 +44,45 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatButton btn_ace_teamA;
     private AppCompatButton btn_ace_teamB;
 
-    private int aces_teamA;
-    private int aces_teamB;
-    private int points_teamA;
-    private int points_teamB;
+    private int acesTeamA;
+    private int acesTeamB;
+
+    private TextView[] refMatchPointsTeamA;
+    private TextView[] refMatchPointsTeamB;
+    private int[] matchPointsTeamA;
+    private int[] matchPointsTeamB;
+
+    private Sets currentSet;
+
+    enum Sets {
+        SET_1, SET_2, SET_3, SET_4, SET_5
+    }
 
     @Override
     protected void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
         setContentView( R.layout.activity_main );
 
-        points_teamA = 0;
-        points_teamB = 0;
-        aces_teamA = 0;
-        aces_teamB = 0;
+        currentSet = SET_1;
 
         setComponents();
+
+        refMatchPointsTeamA = new TextView[] {
+                ref_score_set1_teamA, ref_score_set2_teamA,
+                ref_score_set3_teamA, ref_score_set4_teamA,
+                ref_score_set5_teamA
+        };
+
+        refMatchPointsTeamB = new TextView[] {
+                ref_score_set1_teamB, ref_score_set2_teamB,
+                ref_score_set3_teamB, ref_score_set4_teamB,
+                ref_score_set5_teamB
+        };
+
+        matchPointsTeamA = new int[] {0, 0, 0, 0, 0};
+        matchPointsTeamB = new int[] {0, 0, 0, 0, 0};
+        acesTeamA = 0;
+        acesTeamB = 0;
         setButtons();
     }
 
@@ -65,39 +95,84 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void onClickAddPointTeamA() {
-
+        btn_addPoint_teamA.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+                addPointTo( "Team A" );
+            }
+        } );
     }
 
     private void onClickAddPointTeamB() {
+        btn_addPoint_teamB.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick( View v ) {
+                addPointTo( "Team B" );
+            }
+        } );
 
+    }
+
+    private void addPointTo( String nameTeam ) {
+        switch( currentSet ) {
+            case SET_1:
+                addSetPointTo( SET_1, nameTeam );
+                break;
+            case SET_2:
+                addSetPointTo( SET_2, nameTeam );
+                break;
+            case SET_3:
+                addSetPointTo( SET_3, nameTeam );
+                break;
+            case SET_4:
+                addSetPointTo( SET_4, nameTeam );
+                break;
+            case SET_5:
+                addSetPointTo( SET_5, nameTeam );
+        }
+    }
+
+    @SuppressLint( "SetTextI18n" )
+    private void addSetPointTo( Sets setNumber, String nameTeam ) {
+        int set = setNumber.ordinal();
+
+        if( nameTeam.equals( "Team A" ) ) {
+            ++matchPointsTeamA[ set ];
+            refMatchPointsTeamA[ set ].setText( Integer.toString( matchPointsTeamA[ set ] ) );
+        } else if( nameTeam.equals( "Team B" ) ) {
+            ++matchPointsTeamB[ set ];
+            refMatchPointsTeamB[ set ].setText( Integer.toString( matchPointsTeamB[ set ] ) );
+        }
     }
 
     private void onClickAddAceTeamA() {
         btn_ace_teamA.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
+                addPointTo( "Team A" );
                 addAceTeamA();
             }
         } );
     }
 
     private void addAceTeamA() {
-        ++aces_teamA;
-        ref_aces_teamA.setText( String.valueOf( aces_teamA ) );
+        ++acesTeamA;
+        ref_aces_teamA.setText( String.valueOf( acesTeamA ) );
     }
 
     private void onClickAddAceTeamB() {
         btn_ace_teamB.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick( View v ) {
+                addPointTo( "Team B" );
                 addAceTeamB();
             }
         } );
     }
 
     private void addAceTeamB() {
-        ++aces_teamB;
-        ref_aces_teamB.setText( String.valueOf( aces_teamB ) );
+        ++acesTeamB;
+        ref_aces_teamB.setText( String.valueOf( acesTeamB ) );
     }
 
     private void onClickResetGame() {
