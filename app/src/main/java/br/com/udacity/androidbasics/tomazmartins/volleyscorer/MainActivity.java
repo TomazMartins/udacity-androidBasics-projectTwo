@@ -1,15 +1,12 @@
 package br.com.udacity.androidbasics.tomazmartins.volleyscorer;
 
 import android.annotation.SuppressLint;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import java.util.Set;
 
 import static br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivity.Sets.SET_1;
 import static br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivity.Sets.SET_2;
@@ -47,10 +44,12 @@ public class MainActivity extends AppCompatActivity {
     private AppCompatButton btn_ace_teamA;
     private AppCompatButton btn_ace_teamB;
 
-    private int acesTeamA;
-    private int acesTeamB;
+    private int qtdSetsOverdueTeamA;
+    private int qtdSetsOverdueTeamB;
     private int currentPointsTeamA;
     private int currentPointsTeamB;
+    private int acesTeamA;
+    private int acesTeamB;
 
     private TextView[] refMatchPointsTeamA;
     private TextView[] refMatchPointsTeamB;
@@ -110,12 +109,15 @@ public class MainActivity extends AppCompatActivity {
 
         matchPointsTeamA = new int[] {0, 0, 0, 0, 0};
         matchPointsTeamB = new int[] {0, 0, 0, 0, 0};
+        qtdSetsOverdueTeamA = 0;
+        qtdSetsOverdueTeamB = 0;
         currentPointsTeamA = 0;
         currentPointsTeamB = 0;
         acesTeamA = 0;
         acesTeamB = 0;
 
         setButtons();
+        updateGeneralInfo( "Game Begin" );
     }
 
     private void setButtons() {
@@ -146,8 +148,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addPointTo( String nameTeam ) {
-        checkWinner();
-
         switch( currentSet ) {
             case SET_1:
                 addSetPointTo( SET_1, nameTeam );
@@ -164,23 +164,62 @@ public class MainActivity extends AppCompatActivity {
             case SET_5:
                 addSetPointTo( SET_5, nameTeam );
         }
+
+        checkWinner();
     }
 
     private void checkWinner() {
+        updateGeneralInfo( "Normal Game" );
+
+        boolean ruleToSpecialPoint = (currentPointsTeamA-currentPointsTeamB) >= 1 ||
+                (currentPointsTeamB-currentPointsTeamA) >= 1;
+
+        boolean ruleToTriggerSpecialPoint = currentPointsTeamA > 23 || currentPointsTeamB > 23;
+
+        if( ruleToTriggerSpecialPoint && ruleToSpecialPoint ) {
+            if( qtdSetsOverdueTeamA == 3 || qtdSetsOverdueTeamB == 3 ) {
+                updateGeneralInfo( "Match Point!!" );
+            } else {
+                updateGeneralInfo( "Set Point!" );
+            }
+        }
+
         boolean firstRuleToWin = (currentPointsTeamA >= 25) || (currentPointsTeamB >= 25);
 
         if( firstRuleToWin ) {
-
             boolean ruleToWinTeamA = (currentPointsTeamA-currentPointsTeamB) >= 2;
             boolean ruleToWinTeamB = (currentPointsTeamB-currentPointsTeamA) >= 2;
 
             if( ruleToWinTeamA || ruleToWinTeamB ) {
+                if( ruleToWinTeamA ) {
+                    ++qtdSetsOverdueTeamA;
+                    updateGeneralInfo( "Team A Win this Set" );
+                } else {
+                    ++qtdSetsOverdueTeamB;
+                    updateGeneralInfo( "Team B Win this Set" );
+                }
+
                 currentSet = currentSet.next();
 
                 currentPointsTeamA = 0;
+                updateScoreTeamA( currentPointsTeamA );
+
                 currentPointsTeamB = 0;
+                updateScoreTeamB( currentPointsTeamB );
             }
         }
+    }
+
+    private void updateScoreTeamA( int score ) {
+        score_teamA.setText( String.valueOf( score ) );
+    }
+
+    private void updateScoreTeamB( int score ) {
+        score_teamB.setText( String.valueOf( score ) );
+    }
+
+    private void updateGeneralInfo( String info ) {
+        general_info.setText( info );
     }
 
     @SuppressLint( "SetTextI18n" )
@@ -192,13 +231,13 @@ public class MainActivity extends AppCompatActivity {
             refMatchPointsTeamA[ set ].setText( Integer.toString( matchPointsTeamA[ set ] ) );
 
             ++currentPointsTeamA;
-            score_teamA.setText( String.valueOf( currentPointsTeamA ) );
+            updateScoreTeamA( currentPointsTeamA );
         } else if( nameTeam.equals( "Team B" ) ) {
             ++matchPointsTeamB[ set ];
             refMatchPointsTeamB[ set ].setText( Integer.toString( matchPointsTeamB[ set ] ) );
 
             ++currentPointsTeamB;
-            score_teamB.setText( String.valueOf( currentPointsTeamB ) );
+            updateScoreTeamB( currentPointsTeamB );
         }
     }
 
