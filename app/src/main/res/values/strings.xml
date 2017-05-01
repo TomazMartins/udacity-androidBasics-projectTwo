@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">VolleyScorer</string>
+    <string name="title_block_infoMatch">Match</string>
+    <string name="title_block_infoSet">Current Set</string>
+    <string name="name_teamA">Team A</string>
+    <string name="name_teamB">Team B</string>
+    <string name="std_score">0</string>
+    <string name="add_Point">+1 Point</string>
+    <string name="ace">Ace</string>
+    <string name="reset">Reset Game</string>
+    <string name="set_1">Set 1</string>
+    <string name="set_2">Set 2</string>
+    <string name="set_3">Set 3</string>
+    <string name="set_4">Set 4</string>
+    <string name="set_5">Set 5</string>
+    <string name="aces">Aces</string>
 </resources>
