@@ -14,4 +14,5 @@
     <string name="set_4">Set 4</string>
     <string name="set_5">Set 5</string>
     <string name="aces">Aces</string>
+    <string name="description_ball_possession">Image of who owns the ball</string>
 </resources>
