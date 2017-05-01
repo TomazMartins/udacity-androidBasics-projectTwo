@@ -4,9 +4,12 @@ import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.AppCompatButton;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.Set;
 
 import static br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivity.Sets.SET_1;
 import static br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivity.Sets.SET_2;
@@ -46,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int acesTeamA;
     private int acesTeamB;
+    private int currentPointsTeamA;
+    private int currentPointsTeamB;
 
     private TextView[] refMatchPointsTeamA;
     private TextView[] refMatchPointsTeamB;
@@ -55,7 +60,31 @@ public class MainActivity extends AppCompatActivity {
     private Sets currentSet;
 
     enum Sets {
-        SET_1, SET_2, SET_3, SET_4, SET_5
+        SET_1, SET_2, SET_3, SET_4, SET_5;
+
+        public Sets next() {
+            Sets next = null;
+
+            switch( this ) {
+                case SET_1:
+                    next = SET_2;
+                    break;
+                case SET_2:
+                    next = SET_3;
+                    break;
+                case SET_3:
+                    next = SET_4;
+                    break;
+                case SET_4:
+                    next = SET_5;
+                    break;
+                case SET_5:
+                    next = SET_1;
+                    break;
+            }
+
+            return next;
+        }
     }
 
     @Override
@@ -81,8 +110,11 @@ public class MainActivity extends AppCompatActivity {
 
         matchPointsTeamA = new int[] {0, 0, 0, 0, 0};
         matchPointsTeamB = new int[] {0, 0, 0, 0, 0};
+        currentPointsTeamA = 0;
+        currentPointsTeamB = 0;
         acesTeamA = 0;
         acesTeamB = 0;
+
         setButtons();
     }
 
@@ -114,6 +146,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void addPointTo( String nameTeam ) {
+        checkWinner();
+
         switch( currentSet ) {
             case SET_1:
                 addSetPointTo( SET_1, nameTeam );
@@ -132,6 +166,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void checkWinner() {
+        boolean firstRuleToWin = (currentPointsTeamA >= 25) || (currentPointsTeamB >= 25);
+
+        if( firstRuleToWin ) {
+
+            boolean ruleToWinTeamA = (currentPointsTeamA-currentPointsTeamB) >= 2;
+            boolean ruleToWinTeamB = (currentPointsTeamB-currentPointsTeamA) >= 2;
+
+            if( ruleToWinTeamA || ruleToWinTeamB ) {
+                currentSet = currentSet.next();
+
+                currentPointsTeamA = 0;
+                currentPointsTeamB = 0;
+            }
+        }
+    }
+
     @SuppressLint( "SetTextI18n" )
     private void addSetPointTo( Sets setNumber, String nameTeam ) {
         int set = setNumber.ordinal();
@@ -139,9 +190,15 @@ public class MainActivity extends AppCompatActivity {
         if( nameTeam.equals( "Team A" ) ) {
             ++matchPointsTeamA[ set ];
             refMatchPointsTeamA[ set ].setText( Integer.toString( matchPointsTeamA[ set ] ) );
+
+            ++currentPointsTeamA;
+            score_teamA.setText( String.valueOf( currentPointsTeamA ) );
         } else if( nameTeam.equals( "Team B" ) ) {
             ++matchPointsTeamB[ set ];
             refMatchPointsTeamB[ set ].setText( Integer.toString( matchPointsTeamB[ set ] ) );
+
+            ++currentPointsTeamB;
+            score_teamB.setText( String.valueOf( currentPointsTeamB ) );
         }
     }
 
