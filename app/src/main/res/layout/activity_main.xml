@@ -8,357 +8,167 @@
     android:orientation="vertical"
     tools:context="br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/block_infoMatch"
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/std_margin"
-        android:background="@color/colorPrimaryDark" >
-
-        <TextView
-            android:id="@+id/title_block_infoMatch"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingStart="@dimen/std_padding"
-            android:paddingLeft="@dimen/std_padding"
-            android:paddingTop="@dimen/std_padding"
-            android:paddingRight="@dimen/std_padding"
-            android:paddingEnd="@dimen/std_padding"
-            android:paddingBottom="@dimen/minimum_padding"
-            android:textAllCaps="true"
-            android:textStyle="bold"
-            android:textSize="@dimen/std_titleSize"
-            android:textColor="@android:color/white"
-            android:text="@string/title_block_infoMatch" />
-
-        <RelativeLayout
-            android:id="@+id/block_partialsMatch"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <TextView
-                android:id="@+id/a_space"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:paddingStart="@dimen/blank_padding"
-                android:paddingRight="@dimen/blank_padding"
-                android:paddingBottom="@dimen/std_padding"
-                android:paddingEnd="@dimen/blank_padding" />
-
-            <TextView
-                android:id="@+id/ref_teamA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/a_space"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:paddingRight="35dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textColor="@android:color/white"
-                android:text="@string/name_teamA" />
-
-            <TextView
-                android:id="@+id/ref_teamB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_below="@id/ref_teamA"
-                android:paddingRight="35dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textColor="@android:color/white"
-                android:text="@string/name_teamB" />
-
-            <TextView
-                android:id="@+id/score_set_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/a_space"
-                android:layout_toEndOf="@id/a_space"
-                android:paddingRight="@dimen/std_padding"
-                android:paddingLeft="@dimen/std_padding"
-                android:paddingEnd="@dimen/std_padding"
-                android:textColor="@android:color/white"
-                android:text="@string/set_1" />
-
-            <TextView
-                android:id="@+id/ref_score_set1_teamA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_teamA"
-                android:layout_toEndOf="@id/ref_teamA"
-                android:layout_below="@id/score_set_1"
-                android:paddingTop="@dimen/std_padding"
-                android:paddingRight="42dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/ref_score_set1_teamB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_teamB"
-                android:layout_toEndOf="@id/ref_teamB"
-                android:layout_below="@id/ref_score_set1_teamA"
-                android:paddingRight="42dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/score_set_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/score_set_1"
-                android:layout_toEndOf="@id/score_set_1"
-                android:paddingRight="@dimen/std_padding"
-                android:paddingLeft="@dimen/std_padding"
-                android:paddingEnd="@dimen/std_padding"
-                android:textColor="@android:color/white"
-                android:text="@string/set_2" />
-
-            <TextView
-                android:id="@+id/ref_score_set2_teamA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_score_set1_teamA"
-                android:layout_toEndOf="@id/ref_score_set1_teamA"
-                android:layout_below="@id/score_set_2"
-                android:paddingTop="@dimen/std_padding"
-                android:paddingRight="42dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/ref_score_set2_teamB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_score_set1_teamB"
-                android:layout_toEndOf="@id/ref_score_set1_teamB"
-                android:layout_below="@id/ref_score_set2_teamA"
-                android:paddingRight="42dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/score_set_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/score_set_2"
-                android:layout_toEndOf="@id/score_set_2"
-                android:paddingRight="@dimen/std_padding"
-                android:paddingLeft="@dimen/std_padding"
-                android:paddingEnd="@dimen/std_padding"
-                android:textColor="@android:color/white"
-                android:text="@string/set_3" />
-
-            <TextView
-                android:id="@+id/ref_score_set3_teamA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_score_set2_teamA"
-                android:layout_toEndOf="@id/ref_score_set2_teamA"
-                android:layout_below="@id/score_set_2"
-                android:paddingTop="@dimen/std_padding"
-                android:paddingRight="42dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/ref_score_set3_teamB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_score_set2_teamB"
-                android:layout_toEndOf="@id/ref_score_set2_teamB"
-                android:layout_below="@id/ref_score_set3_teamA"
-                android:paddingRight="42dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/score_set_4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/score_set_3"
-                android:layout_toEndOf="@id/score_set_3"
-                android:paddingRight="@dimen/std_padding"
-                android:paddingLeft="@dimen/std_padding"
-                android:paddingEnd="@dimen/std_padding"
-                android:textColor="@android:color/white"
-                android:text="@string/set_4" />
-
-            <TextView
-                android:id="@+id/ref_score_set4_teamA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_score_set3_teamA"
-                android:layout_toEndOf="@id/ref_score_set3_teamA"
-                android:layout_below="@id/score_set_3"
-                android:paddingTop="@dimen/std_padding"
-                android:paddingRight="42dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/ref_score_set4_teamB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_score_set3_teamB"
-                android:layout_toEndOf="@id/ref_score_set3_teamB"
-                android:layout_below="@id/ref_score_set4_teamA"
-                android:paddingRight="42dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/score_set_5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/score_set_4"
-                android:layout_toEndOf="@id/score_set_4"
-                android:paddingRight="@dimen/std_padding"
-                android:paddingLeft="@dimen/std_padding"
-                android:paddingEnd="@dimen/std_padding"
-                android:textColor="@android:color/white"
-                android:text="@string/set_5" />
-
-            <TextView
-                android:id="@+id/ref_score_set5_teamA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_score_set4_teamA"
-                android:layout_toEndOf="@id/ref_score_set4_teamA"
-                android:layout_below="@id/score_set_4"
-                android:paddingTop="@dimen/std_padding"
-                android:paddingRight="42dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/ref_score_set5_teamB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_score_set4_teamB"
-                android:layout_toEndOf="@id/ref_score_set4_teamB"
-                android:layout_below="@id/ref_score_set5_teamA"
-                android:paddingRight="42dp"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/qtd_aces"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/score_set_5"
-                android:layout_toEndOf="@id/score_set_5"
-                android:textColor="@android:color/white"
-                android:text="@string/aces" />
-
-            <TextView
-                android:id="@+id/ref_aces_teamA"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_score_set5_teamA"
-                android:layout_toEndOf="@id/ref_score_set5_teamA"
-                android:layout_below="@id/score_set_5"
-                android:paddingTop="@dimen/std_padding"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-            <TextView
-                android:id="@+id/ref_aces_teamB"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/ref_score_set5_teamB"
-                android:layout_toEndOf="@id/ref_score_set5_teamB"
-                android:layout_below="@id/ref_aces_teamA"
-                android:paddingBottom="@dimen/std_padding"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:text="@string/std_score" />
-
-        </RelativeLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/block_infoSet"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/std_margin"
-        android:background="@color/colorPrimaryDark" >
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/title_block_infoSet"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingStart="@dimen/std_padding"
-                android:paddingLeft="@dimen/std_padding"
-                android:paddingTop="@dimen/std_padding"
-                android:paddingRight="@dimen/std_padding"
-                android:paddingEnd="@dimen/std_padding"
-                android:paddingBottom="@dimen/minimum_padding"
-                android:textAllCaps="true"
-                android:textStyle="bold"
-                android:textSize="@dimen/std_titleSize"
-                android:textColor="@android:color/white"
-                android:text="@string/title_block_infoSet" />
-
-            <TextView
-                android:id="@+id/general_info"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:padding="@dimen/minimum_padding"
-                android:gravity="center"
-                android:textSize="@dimen/std_textSize"
-                android:textStyle="bold"
-                android:textColor="@android:color/white" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/block_content_infoSet"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
 
             <LinearLayout
-                android:id="@+id/block_infoSet_teamA"
+                android:id="@+id/block_infoMatch"
                 android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" >
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/std_margin"
+                android:background="@color/primaryDark" >
+
+                <TextView
+                    android:id="@+id/title_block_infoMatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/std_padding"
+                    android:paddingLeft="@dimen/std_padding"
+                    android:paddingTop="@dimen/std_padding"
+                    android:paddingRight="@dimen/std_padding"
+                    android:paddingEnd="@dimen/std_padding"
+                    android:paddingBottom="@dimen/minimum_padding"
+                    android:textAllCaps="true"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/std_titleSize"
+                    android:textColor="@android:color/white"
+                    android:text="@string/title_block_infoMatch" />
+
+                <TableLayout
+                    android:id="@+id/block_partialsMatch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TableRow>
+                        <TextView
+                            android:id="@+id/a_space"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:id="@+id/score_set_1"
+                            style="@style/tableCellTitle"
+                            android:text="@string/set_1" />
+
+                        <TextView
+                            android:id="@+id/score_set_2"
+                            style="@style/tableCellTitle"
+                            android:text="@string/set_2" />
+
+                        <TextView
+                            android:id="@+id/score_set_3"
+                            style="@style/tableCellTitle"
+                            android:text="@string/set_3" />
+
+                        <TextView
+                            android:id="@+id/score_set_4"
+                            style="@style/tableCellTitle"
+                            android:text="@string/set_4" />
+
+                        <TextView
+                            android:id="@+id/score_set_5"
+                            style="@style/tableCellTitle"
+                            android:text="@string/set_5" />
+
+                        <TextView
+                            android:id="@+id/qtd_aces"
+                            style="@style/tableCellTitle"
+                            android:text="@string/aces" />
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/ref_teamA"
+                            style="@style/tableCellTitle"
+                            android:text="@string/name_teamA" />
+
+                        <TextView
+                            android:id="@+id/ref_score_set1_teamA"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                        <TextView
+                            android:id="@+id/ref_score_set2_teamA"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                        <TextView
+                            android:id="@+id/ref_score_set3_teamA"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                        <TextView
+                            android:id="@+id/ref_score_set4_teamA"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                        <TextView
+                            android:id="@+id/ref_score_set5_teamA"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                        <TextView
+                            android:id="@+id/ref_aces_teamA"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                    </TableRow>
+                    <TableRow>
+
+                        <TextView
+                            android:id="@+id/ref_teamB"
+                            style="@style/tableCellTitle"
+                            android:text="@string/name_teamB" />
+
+                        <TextView
+                            android:id="@+id/ref_score_set1_teamB"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                        <TextView
+                            android:id="@+id/ref_score_set2_teamB"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                        <TextView
+                            android:id="@+id/ref_score_set3_teamB"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                        <TextView
+                            android:id="@+id/ref_score_set4_teamB"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                        <TextView
+                            android:id="@+id/ref_score_set5_teamB"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                        <TextView
+                            android:id="@+id/ref_aces_teamB"
+                            style="@style/tableCell"
+                            android:text="@string/std_score" />
+
+                    </TableRow>
+                </TableLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/block_infoSet"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/std_margin"
+                android:background="@color/primaryDark" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -366,114 +176,154 @@
                     android:orientation="horizontal" >
 
                     <TextView
-                        android:id="@+id/name_teamA"
-                        android:layout_width="0dp"
+                        android:id="@+id/title_block_infoSet"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
-                        android:padding="@dimen/minimum_padding"
-                        android:gravity="center"
-                        android:textSize="@dimen/std_subTitleSize"
+                        android:paddingStart="@dimen/std_padding"
+                        android:paddingLeft="@dimen/std_padding"
+                        android:paddingTop="@dimen/std_padding"
+                        android:paddingRight="@dimen/std_padding"
+                        android:paddingEnd="@dimen/std_padding"
+                        android:paddingBottom="@dimen/minimum_padding"
+                        android:textAllCaps="true"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/std_titleSize"
                         android:textColor="@android:color/white"
-                        android:text="@string/name_teamA" />
-
-                    <ImageView
-                        android:id="@+id/ball_possession_teamA"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
-
-                </LinearLayout>
-
-                <TextView
-                    android:id="@+id/score_teamA"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/minimum_padding"
-                    android:gravity="center"
-                    android:textSize="@dimen/std_scoreSize"
-                    android:textColor="@android:color/white"
-                    android:text="@string/std_score" />
-
-                <Button
-                    android:id="@+id/btn_addPoint_teamA"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/std_margin"
-                    android:text="@string/add_Point" />
-
-                <Button
-                    android:id="@+id/btn_ace_teamA"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/std_margin"
-                    android:text="@string/ace" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/block_infoSet_teamB"
-                android:orientation="vertical"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent" >
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                        android:text="@string/title_block_infoSet" />
 
                     <TextView
-                        android:id="@+id/name_teamB"
+                        android:id="@+id/general_info"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="3"
+                        android:layout_weight="1"
                         android:padding="@dimen/minimum_padding"
                         android:gravity="center"
-                        android:textSize="@dimen/std_subTitleSize"
-                        android:textColor="@android:color/white"
-                        android:text="@string/name_teamB" />
-
-                    <ImageView
-                        android:id="@+id/ball_possession_teamB"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"/>
+                        android:textSize="@dimen/std_textSize"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/white" />
 
                 </LinearLayout>
 
-                <TextView
-                    android:id="@+id/score_teamB"
+                <LinearLayout
+                    android:id="@+id/block_content_infoSet"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="@dimen/minimum_padding"
-                    android:gravity="center"
-                    android:textSize="@dimen/std_scoreSize"
-                    android:textColor="@android:color/white"
-                    android:text="@string/std_score" />
+                    android:layout_height="match_parent">
 
-                <Button
-                    android:id="@+id/btn_addPoint_teamB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/std_margin"
-                    android:text="@string/add_Point" />
+                    <LinearLayout
+                        android:id="@+id/block_infoSet_teamA"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" >
 
-                <Button
-                    android:id="@+id/btn_ace_teamB"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/std_margin"
-                    android:text="@string/ace" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
 
+                            <TextView
+                                android:id="@+id/name_teamA"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:padding="@dimen/minimum_padding"
+                                android:gravity="center"
+                                android:textSize="@dimen/std_subTitleSize"
+                                android:textColor="@android:color/white"
+                                android:text="@string/name_teamA" />
+
+                            <ImageView
+                                android:id="@+id/ball_possession_teamA"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/score_teamA"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/minimum_padding"
+                            android:gravity="center"
+                            android:textSize="@dimen/std_scoreSize"
+                            android:textColor="@android:color/white"
+                            android:text="@string/std_score" />
+
+                        <Button
+                            android:id="@+id/btn_addPoint_teamA"
+                            style="@style/buttonStyle"
+                            android:text="@string/add_Point" />
+
+                        <Button
+                            android:id="@+id/btn_ace_teamA"
+                            style="@style/buttonStyle"
+                            android:text="@string/ace" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/block_infoSet_teamB"
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="match_parent" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal" >
+
+                            <TextView
+                                android:id="@+id/name_teamB"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="3"
+                                android:padding="@dimen/minimum_padding"
+                                android:gravity="center"
+                                android:textSize="@dimen/std_subTitleSize"
+                                android:textColor="@android:color/white"
+                                android:text="@string/name_teamB" />
+
+                            <ImageView
+                                android:id="@+id/ball_possession_teamB"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/score_teamB"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/minimum_padding"
+                            android:gravity="center"
+                            android:textSize="@dimen/std_scoreSize"
+                            android:textColor="@android:color/white"
+                            android:text="@string/std_score" />
+
+                        <Button
+                            android:id="@+id/btn_addPoint_teamB"
+                            style="@style/buttonStyle"
+                            android:text="@string/add_Point" />
+
+                        <Button
+                            android:id="@+id/btn_ace_teamB"
+                            style="@style/buttonStyle"
+                            android:text="@string/ace" />
+
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
 
-    <Button
-        android:id="@+id/btn_reset_match"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/std_margin"
-        android:text="@string/reset"/>
+            <Button
+                android:id="@+id/btn_reset_match"
+                style="@style/buttonStyle"
+                android:text="@string/reset"/>
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
