@@ -1,8 +1,8 @@
 package br.com.udacity.androidbasics.tomazmartins.volleyscorer;
 
 import android.annotation.SuppressLint;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.view.View;
@@ -17,6 +17,8 @@ import static br.com.udacity.androidbasics.tomazmartins.volleyscorer.MainActivit
 
 
 public class MainActivity extends AppCompatActivity {
+    final private long FIVE_SECS = 5000;
+
     private TextView ref_score_set1_teamA;
     private TextView ref_score_set2_teamA;
     private TextView ref_score_set3_teamA;
@@ -60,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private Sets currentSet;
 
     enum Sets {
-        SET_1, SET_2, SET_3, SET_4, SET_5;
+        SET_1, SET_2, SET_3, SET_4, SET_5, END;
 
         public Sets next() {
             Sets next = null;
@@ -79,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
                     next = SET_5;
                     break;
                 case SET_5:
-                    next = SET_1;
+                    next = END;
                     break;
             }
 
@@ -181,23 +183,57 @@ public class MainActivity extends AppCompatActivity {
             boolean ruleToWinTeamB = (currentPointsTeamB-currentPointsTeamA) >= 2;
 
             if( ruleToWinTeamA || ruleToWinTeamB ) {
-                if( ruleToWinTeamA ) {
-                    ++qtdSetsOverdueTeamA;
-                    updateGeneralInfo( "Team A Win this Set" );
-                } else {
-                    ++qtdSetsOverdueTeamB;
-                    updateGeneralInfo( "Team B Win this Set" );
-                }
-
-                currentSet = currentSet.next();
-
-                currentPointsTeamA = 0;
-                updateScoreTeamA( currentPointsTeamA );
-
-                currentPointsTeamB = 0;
-                updateScoreTeamB( currentPointsTeamB );
+                checkSetWinner( ruleToWinTeamA );
+                checkMatchWinner();
             }
         }
+    }
+
+    private void checkSetWinner( boolean rule ) {
+        if( rule ) {
+            ++qtdSetsOverdueTeamA;
+            updateGeneralInfo( "Team A Win this Set" );
+        } else {
+            ++qtdSetsOverdueTeamB;
+            updateGeneralInfo( "Team B Win this Set" );
+        }
+    }
+
+    private void checkMatchWinner() {
+        Handler handler = new Handler();
+
+        if( qtdSetsOverdueTeamA == 3 ) {
+            updateGeneralInfo( "TEAM A WIN THE GAME" );
+
+            handler.postDelayed( new Runnable() {
+                @Override
+                public void run() {
+                    resetGame();
+                }
+            }, FIVE_SECS );
+
+        } else if( qtdSetsOverdueTeamB == 3 ) {
+            updateGeneralInfo( "TEAM B WIN THE GAME" );
+
+            handler.postDelayed( new Runnable() {
+                @Override
+                public void run() {
+                    resetGame();
+                }
+            }, FIVE_SECS );
+        } else {
+            updateMatchInfo();
+        }
+    }
+
+    private void updateMatchInfo() {
+        currentSet = currentSet.next();
+
+        currentPointsTeamA = 0;
+        updateScoreTeamA( currentPointsTeamA );
+
+        currentPointsTeamB = 0;
+        updateScoreTeamB( currentPointsTeamB );
     }
 
     private void checkSpecialPoint() {
@@ -207,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
         boolean ruleToTriggerSpecialPoint = currentPointsTeamA > 23 || currentPointsTeamB > 23;
 
         if( ruleToTriggerSpecialPoint && ruleToSpecialPoint ) {
-            if( qtdSetsOverdueTeamA == 3 || qtdSetsOverdueTeamB == 3 ) {
+            if( qtdSetsOverdueTeamA == 2 || qtdSetsOverdueTeamB == 2 ) {
                 updateGeneralInfo( "Match Point!!" );
             } else {
                 updateGeneralInfo( "Set Point!" );
@@ -292,8 +328,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void resetGame() {
+        currentSet = SET_1;
+
         resetSetPoints();
         resetMatchPoints();
+
+        updateGeneralInfo( "Game Begin" );
+
+        ball_possession_teamA.setImageResource( 0 );
+        ball_possession_teamB.setImageResource( 0 );
     }
 
     private void resetMatchPoints() {
