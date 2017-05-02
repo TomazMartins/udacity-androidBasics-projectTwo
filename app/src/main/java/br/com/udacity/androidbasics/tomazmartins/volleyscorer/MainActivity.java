@@ -1,6 +1,7 @@
 package br.com.udacity.androidbasics.tomazmartins.volleyscorer;
 
 import android.annotation.SuppressLint;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
@@ -171,22 +172,11 @@ public class MainActivity extends AppCompatActivity {
     private void checkWinner() {
         updateGeneralInfo( "Normal Game" );
 
-        boolean ruleToSpecialPoint = (currentPointsTeamA-currentPointsTeamB) >= 1 ||
-                (currentPointsTeamB-currentPointsTeamA) >= 1;
+        checkSpecialPoint();
 
-        boolean ruleToTriggerSpecialPoint = currentPointsTeamA > 23 || currentPointsTeamB > 23;
+        boolean ruleToWin = (currentPointsTeamA >= 25) || (currentPointsTeamB >= 25);
 
-        if( ruleToTriggerSpecialPoint && ruleToSpecialPoint ) {
-            if( qtdSetsOverdueTeamA == 3 || qtdSetsOverdueTeamB == 3 ) {
-                updateGeneralInfo( "Match Point!!" );
-            } else {
-                updateGeneralInfo( "Set Point!" );
-            }
-        }
-
-        boolean firstRuleToWin = (currentPointsTeamA >= 25) || (currentPointsTeamB >= 25);
-
-        if( firstRuleToWin ) {
+        if( ruleToWin ) {
             boolean ruleToWinTeamA = (currentPointsTeamA-currentPointsTeamB) >= 2;
             boolean ruleToWinTeamB = (currentPointsTeamB-currentPointsTeamA) >= 2;
 
@@ -206,6 +196,21 @@ public class MainActivity extends AppCompatActivity {
 
                 currentPointsTeamB = 0;
                 updateScoreTeamB( currentPointsTeamB );
+            }
+        }
+    }
+
+    private void checkSpecialPoint() {
+        boolean ruleToSpecialPoint = (currentPointsTeamA-currentPointsTeamB) >= 1 ||
+                (currentPointsTeamB-currentPointsTeamA) >= 1;
+
+        boolean ruleToTriggerSpecialPoint = currentPointsTeamA > 23 || currentPointsTeamB > 23;
+
+        if( ruleToTriggerSpecialPoint && ruleToSpecialPoint ) {
+            if( qtdSetsOverdueTeamA == 3 || qtdSetsOverdueTeamB == 3 ) {
+                updateGeneralInfo( "Match Point!!" );
+            } else {
+                updateGeneralInfo( "Set Point!" );
             }
         }
     }
@@ -230,11 +235,17 @@ public class MainActivity extends AppCompatActivity {
             ++matchPointsTeamA[ set ];
             refMatchPointsTeamA[ set ].setText( Integer.toString( matchPointsTeamA[ set ] ) );
 
+            ball_possession_teamB.setImageResource( 0 );
+            ball_possession_teamA.setImageResource( R.drawable.volleyball );
+
             ++currentPointsTeamA;
             updateScoreTeamA( currentPointsTeamA );
         } else if( nameTeam.equals( "Team B" ) ) {
             ++matchPointsTeamB[ set ];
             refMatchPointsTeamB[ set ].setText( Integer.toString( matchPointsTeamB[ set ] ) );
+
+            ball_possession_teamA.setImageResource( 0 );
+            ball_possession_teamB.setImageResource( R.drawable.volleyball );
 
             ++currentPointsTeamB;
             updateScoreTeamB( currentPointsTeamB );

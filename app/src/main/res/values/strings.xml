@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">VolleyScorer</string>
+    <string name="app_name">Volley Scorer</string>
     <string name="title_block_infoMatch">Match</string>
     <string name="title_block_infoSet">Current Set</string>
     <string name="name_teamA">Team A</string>

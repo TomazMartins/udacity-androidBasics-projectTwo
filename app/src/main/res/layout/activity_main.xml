@@ -232,9 +232,9 @@
                         <ImageView
                             android:id="@+id/ball_possession_teamA"
                             android:contentDescription="@string/description_ball_possession"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:paddingRight="@dimen/std_padding" />
 
                     </LinearLayout>
 
@@ -286,9 +286,9 @@
                         <ImageView
                             android:id="@+id/ball_possession_teamB"
                             android:contentDescription="@string/description_ball_possession"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                            android:layout_width="25dp"
+                            android:layout_height="25dp"
+                            android:paddingRight="@dimen/std_padding" />
 
                     </LinearLayout>
 
